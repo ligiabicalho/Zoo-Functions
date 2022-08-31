@@ -1,8 +1,6 @@
 const { employees } = require('../data/zoo_data');
 const data = require('../data/zoo_data');
 
-const burlId = '0e7b460e-acf4-4e17-bcb3-ee472265db83';
-
 function isManager(id) {
   const managered = employees.filter((employee1) => employee1.managers !== []);
   const managers = managered.reduce((acc, employee2) =>
