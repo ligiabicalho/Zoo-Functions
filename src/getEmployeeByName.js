@@ -7,7 +7,4 @@ function getEmployeeByName(employeeName) {
   return employeeObj || {};
 }
 
-console.log(getEmployeeByName('Bethea'));
-// firstName: 'Burl',
-// lastName: 'Bethea'
 module.exports = getEmployeeByName;
