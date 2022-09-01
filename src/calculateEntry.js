@@ -16,6 +16,10 @@ function countEntrants(entrants) {
 }
 
 function calculateEntry(entrants) {
+  if (entrants === undefined || entrants.length === 0
+    || (typeof entrants === 'object' && Object.keys(entrants).length === 0)) {
+    return 0;
+  }
   const values = Object.values(countEntrants(entrants));
   // let result = 0;
   // prices.forEach((price, i) => {
@@ -38,6 +42,6 @@ const entrants = [
 ];
 
 // console.log(countEntrants(entrants));
-console.log(calculateEntry(entrants)); // Retorna: 187.94;
+// console.log(calculateEntry()); // Retorna: 187.94;
 
 module.exports = { calculateEntry, countEntrants };
