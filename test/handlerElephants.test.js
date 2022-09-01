@@ -26,9 +26,8 @@ describe('Testes da função HandlerElephants', () => {
   });
 
   it('Não passando argumentos a função deve retornar undefined', () => {
-    const expected = 'undefined';
     const actual = handlerElephants();
-    expect(actual).toBe(expected);
+    expect(actual).toBeUndefined();
   });
 
   it('Para o argumento location deve retornar a string NW', () => {
@@ -38,8 +37,7 @@ describe('Testes da função HandlerElephants', () => {
   });
 
   it('Para um argumento que não existe deve retornar null', () => {
-    const expected = 'null';
     const actual = handlerElephants('counter');
-    expect(actual).toBe(expected);
+    expect(actual).toBeNull();
   });
 });
