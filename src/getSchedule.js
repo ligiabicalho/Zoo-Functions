@@ -5,10 +5,13 @@ const availability = (scheduleTarget) =>
   species.find((specie) => scheduleTarget === specie.name).availability;
 
 const scheduleDay = (scheduleTarget) => {
-  const days = hours.find((day) => scheduleTarget === hours.day);
-  return `Open from ${days.open}am until ${days.close}pm`;
+  const day = hours[scheduleTarget];
+  if (scheduleTarget === 'Monday') {
+    return 'Not open on Mondays';
+  }
+  return `Open from ${day.open}am until ${day.close}pm`;
 };
-console.log(scheduleDay('Monday'));
+console.log(scheduleDay('Sunday'));
 
 function getSchedule(scheduleTarget) {
   availability(scheduleTarget);

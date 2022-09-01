@@ -21,10 +21,6 @@ function calculateEntry(entrants) {
     return 0;
   }
   const values = Object.values(countEntrants(entrants));
-  // let result = 0;
-  // prices.forEach((price, i) => {
-  //   result += (price * values[i]);
-  // });
   const priceChild = prices.child * values[0];
   const priceAdult = prices.adult * values[1];
   const priceSenior = prices.senior * values[2];
