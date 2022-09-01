@@ -4,19 +4,26 @@ const data = require('../data/zoo_data');
 const getEmployee = (id) =>
   employees.find((employee) => employee.id === id);
 
-// const getSpecie = () =>
-  
+const getFirstSpecieId = (employeeObj) =>
+  employeeObj.responsibleFor.find((specie) => specie[0]);
+
+const getResidents = (firstSpecieId) =>
+  species.find((specie) => specie.id === firstSpecieId).residents;
+
+const getOldest = (residents) =>
+  residents.sort((a, b) => b.age - a.age)[0];
+
+const getArray = (oldest) =>
+  Object.values(oldest);
+
 function getOldestFromFirstSpecies(id) {
   const employeeObj = getEmployee(id);
-  const getFirstSpecieId = employeeObj.responsibleFor.find((specie) => specie[0]);
-  const getResidents = species.find((specie) => specie.id === getFirstSpecieId).residents;
-  const getOldest = getResidents.sort((a, b) => b.age - a.age)[0];
-  const getArray = Object.values(getOldest);
-  return getArray;
+  const firstSpecieId = getFirstSpecieId(employeeObj);
+  const residents = getResidents(firstSpecieId);
+  const oldest = getOldest(residents);
+  return getArray(oldest);
 }
 
-console.log(getOldestFromFirstSpecies('c5b83cb3-a451-49e2-ac45-ff3f54fbe7e1'));
-//'0938aa23-f153-4937-9f88-4858b24d6bce'
 module.exports = getOldestFromFirstSpecies;
 
 // const employees = [
