@@ -16,7 +16,7 @@ console.log(scheduleDay('Sunday'));
 function getSchedule(scheduleTarget) {
   availability(scheduleTarget);
   scheduleDay(scheduleTarget);
-  return 
+  // return;
 }
 
 // console.log((getSchedule('animal'))); // Retorna: [ 'Tuesday', 'Thursday', 'Saturday', 'Sunday' ];
@@ -45,6 +45,5 @@ function getSchedule(scheduleTarget) {
 //   Sunday: { open: 8, close: 8 },
 //   Monday: { open: 0, close: 0 },
 // },
-
 
 module.exports = getSchedule;
