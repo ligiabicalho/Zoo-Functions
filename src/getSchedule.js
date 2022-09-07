@@ -25,13 +25,20 @@ const animalsByDay = (scheduleTarget) => {
 const allAnimals = species.reduce((acc, cur) => [...acc, cur.name], []);
 const allDays = Object.keys(hours);
 
-const buildOneDay = (scheduleTarget) => {
-  const objectDay = {};
-  objectDay[scheduleTarget] = {};
-  objectDay[scheduleTarget].officeHour = scheduleByDay(scheduleTarget);
-  objectDay[scheduleTarget].exhibition = animalsByDay(scheduleTarget);
-  return objectDay;
+const getOneDay = (scheduleTarget) => {
+  const result = {};
+  const objectDay = {
+    officeHour: scheduleByDay(scheduleTarget),
+    exhibition: animalsByDay(scheduleTarget),
+  };
+  result[scheduleTarget] = objectDay;
+  // objectDay[scheduleTarget] = {};
+  // objectDay[scheduleTarget].officeHour = scheduleByDay(vt);
+  // objectDay[scheduleTarget].exhibition = animalsByDay(scheduleTarget);
+  return result;
 };
+
+console.log(getOneDay('Sunday'));
 
 const allInformation = () => {
   const result = {};
@@ -50,7 +57,7 @@ function getSchedule(scheduleTarget) {
     return availabilityByAnimals(scheduleTarget);
   }
   if (hours[scheduleTarget]) {
-    return buildOneDay(scheduleTarget);
+    return getOneDay(scheduleTarget);
   }
   return allInformation();
 }
