@@ -1,30 +1,51 @@
-const { employees } = require('../data/zoo_data');
+const { employees, species } = require('../data/zoo_data');
 const data = require('../data/zoo_data');
 
 const allID = employees.reduce((acc, cur) => [...acc, cur.id], []);
 const allFirstName = employees.reduce((acc, cur) => [...acc, cur.firstName], []);
 const allLastName = employees.reduce((acc, cur) => [...acc, cur.lastName], []);
-console.log(allID, allFirstName, allLastName);
 
 const getEmployee = (employeeData) => {
   if (allID.includes(employeeData.id)) {
-    return
+    const employeeById = employees.find((employee) => employee.id === employeeData.id);
+    return employeeById;
   }
-  if (allFirstName.includes(employeeData.name)
-  || allLastName.includes(employeeData.name)) {
-    return
+  if (allFirstName.includes(employeeData.name)) {
+    const employeeByFirstName = employees.find((employee) =>
+      employee.firstName === employeeData.name);
+    return employeeByFirstName;
   }
+  if (allLastName.includes(employeeData.name)) {
+    const employeeByLastName = employees.find((employee) =>
+      employee.lastName === employeeData.name);
+    return employeeByLastName;
+  }
+  if (Object.keys(employeeData).length < 1) {
+
+  }
+  throw new Error('Informações inválidas');
 };
 
-// const getEmployeefullName = (employeeData) => false;
+const getSpecies = (responsibleFor) => {
+  const filteredSpecies = species.filter((specie) => responsibleFor.includes(specie.id));
+  return filteredSpecies.reduce((acc, cur) => [...acc, cur.name], []);
+};
 
-// const getSpecies = (employeeData) => false;
+const getLocations = (responsibleFor) => {
+  const filteredLocation = species.filter((specie) => responsibleFor.includes(specie.id));
+  return filteredLocation.reduce((acc, cur) => [...acc, cur.location], []);
+};
 
-// const getlocations = (employeeData) => false;
-
-function getEmployeesCoverage(employeeData) { // parametro: employee name (fist or last) OU employee id .
-  getSpecies();
+function getEmployeesCoverage(employeeData) {
+  const objectEmployee = getEmployee(employeeData);
+  const employeesCoverage = {
+    id: objectEmployee.id,
+    fullName: `${objectEmployee.firstName} ${objectEmployee.lastName}`,
+    species: getSpecies(objectEmployee.responsibleFor),
+    locations: getLocations(objectEmployee.responsibleFor),
+  };
+  return employeesCoverage;
 }
 
-// getEmployeesCoverage({name: 'Sharonda'})
+console.log(getEmployeesCoverage({ name: 'Sharonda' }));
 module.exports = getEmployeesCoverage;
