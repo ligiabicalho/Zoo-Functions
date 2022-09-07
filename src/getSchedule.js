@@ -32,13 +32,8 @@ const getOneDay = (scheduleTarget) => {
     exhibition: animalsByDay(scheduleTarget),
   };
   result[scheduleTarget] = objectDay;
-  // objectDay[scheduleTarget] = {};
-  // objectDay[scheduleTarget].officeHour = scheduleByDay(vt);
-  // objectDay[scheduleTarget].exhibition = animalsByDay(scheduleTarget);
   return result;
 };
-
-console.log(getOneDay('Sunday'));
 
 const allInformation = () => {
   const result = {};
