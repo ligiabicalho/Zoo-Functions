@@ -5,6 +5,12 @@ const allID = employees.reduce((acc, cur) => [...acc, cur.id], []);
 const allFirstName = employees.reduce((acc, cur) => [...acc, cur.firstName], []);
 const allLastName = employees.reduce((acc, cur) => [...acc, cur.lastName], []);
 
+const getAllEmployees = () => {
+  const filteredEmployees = employees.reduce((acc, cur) => [...acc, cur], []);
+  return filteredEmployees;
+};
+// console.log(getAllEmployees());
+
 const getEmployee = (employeeData) => {
   if (allID.includes(employeeData.id)) {
     const employeeById = employees.find((employee) => employee.id === employeeData.id);
@@ -20,9 +26,6 @@ const getEmployee = (employeeData) => {
       employee.lastName === employeeData.name);
     return employeeByLastName;
   }
-  if (Object.keys(employeeData).length < 1) {
-
-  }
   throw new Error('Informações inválidas');
 };
 
@@ -37,6 +40,16 @@ const getLocations = (responsibleFor) => {
 };
 
 function getEmployeesCoverage(employeeData) {
+  if (typeof employeeData === 'undefined' || Object.keys(employeeData).length < 1) {
+    const objectAllEmployee = getAllEmployees();
+    return objectAllEmployee.reduce((acc, cur) => [...acc, {
+      id: cur.id,
+      fullName: `${cur.firstName} ${cur.lastName}`,
+      species: getSpecies(cur.responsibleFor),
+      locations: getLocations(cur.responsibleFor),
+    },
+    ], []);
+  }
   const objectEmployee = getEmployee(employeeData);
   const employeesCoverage = {
     id: objectEmployee.id,
@@ -47,5 +60,5 @@ function getEmployeesCoverage(employeeData) {
   return employeesCoverage;
 }
 
-console.log(getEmployeesCoverage({ name: 'Sharonda' }));
+console.log(getEmployeesCoverage({}));
 module.exports = getEmployeesCoverage;
